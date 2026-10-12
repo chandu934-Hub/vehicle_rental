@@ -103,26 +103,28 @@ export default function AuthPage({ register = false }) {
             : 'Enter your credentials to manage your trips and bookings.'}
         </p>
 
-        {/* Demo Credentials Helper Box */}
-        <div className="demo-pills-box">
-          <div className="demo-pills-title">Quick Demo Logins (Click to autofill)</div>
-          <div className="demo-buttons-row">
-            <button
-              type="button"
-              className="demo-btn"
-              onClick={() => fillDemo('customer@roamrentals.com', 'Customer@12345')}
-            >
-              Demo Customer
-            </button>
-            <button
-              type="button"
-              className="demo-btn"
-              onClick={() => fillDemo('admin@roamrentals.com', 'Admin@12345')}
-            >
-              Demo Admin
-            </button>
+        {/* Demo Credentials Helper Box (Login Only) */}
+        {!register && (
+          <div className="demo-pills-box">
+            <div className="demo-pills-title">Quick Demo Logins (Click to autofill)</div>
+            <div className="demo-buttons-row">
+              <button
+                type="button"
+                className="demo-btn"
+                onClick={() => fillDemo('customer@roamrentals.com', 'Customer@12345')}
+              >
+                Demo Customer
+              </button>
+              <button
+                type="button"
+                className="demo-btn"
+                onClick={() => fillDemo('admin@roamrentals.com', 'Admin@12345')}
+              >
+                Demo Admin
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         {error && <div className="alert-box alert-error">{error}</div>}
 
