@@ -15,5 +15,9 @@ services:
         sync: false
       - key: DB_PASSWORD
         sync: false
+      - key: FRONTEND_URL
+        value: https://vehicle-rental-two-pi.vercel.app
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://vehicle-rental-two-pi.vercel.app,https://*.vercel.app,https://*.onrender.com,http://localhost:5173,http://localhost:*
       - key: JWT_SECRET
         generateValue: true
