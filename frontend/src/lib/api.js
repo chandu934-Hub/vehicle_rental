@@ -1,0 +1,7 @@
+import axios from 'axios'
+
+export const api = axios.create({ baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080' })
+api.interceptors.request.use(config => { const token = localStorage.getItem('roam_token'); if (token) config.headers.Authorization = `Bearer ${token}`; return config })
+api.interceptors.response.use(response => response, error => { if (error.response?.status === 401) { localStorage.removeItem('roam_token'); localStorage.removeItem('roam_user'); window.dispatchEvent(new Event('roam:logout')) } return Promise.reject(error) })
+export function formatError(error) { const status = error?.response?.status; if (!error?.response) return 'The service is unavailable. Please check that the backend is running.'; if (status === 400) return error.response.data?.message || 'Please check the details and try again.'; if (status === 401) return 'Your session has expired. Please sign in again.'; if (status === 403) return 'You do not have permission for this action.'; if (status === 404) return 'We could not find that record.'; if (status === 409) return error.response.data?.message || 'Those dates conflict with another booking.'; if (status >= 500) return 'The server could not complete that request. Please try again.'; return error.response.data?.message || 'Something went wrong. Please try again.' }
+export const money = value => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 }).format(value || 0)

@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: ./backend/vehicle-rental-system
+      dockerfile: Dockerfile
+    container_name: roam-rentals-backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/vehicle-rental-system/.env
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: roam-rentals-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
