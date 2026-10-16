@@ -59,10 +59,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    org.springframework.web.filter.CorsFilter corsFilter() {
-        return new org.springframework.web.filter.CorsFilter(corsConfigurationSource());
-    }
+
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
